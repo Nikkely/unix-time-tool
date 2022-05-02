@@ -32,8 +32,3 @@ export function updateTimeStamp(timer: TimerObject): TimerObject {
   });
   return ret;
 }
-
-export function isValidTimer(timer: TimerObject): boolean {
-  const d = new Date(timer.timeStamp);
-  return isValidDate(d);
-}

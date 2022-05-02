@@ -32,3 +32,8 @@ export function updateTimeStamp(timer: TimerObject): TimerObject {
   });
   return ret;
 }
+
+export function updateUnixtime(timer: TimerObject): TimerObject {
+  const ret = { ...timer };
+  return ret;
+}

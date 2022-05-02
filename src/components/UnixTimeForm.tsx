@@ -41,9 +41,6 @@ export function UnixTimeForm(props: any) {
     timeZone: "Asia/Tokyo",
   });
 
-  // state動作確認用
-  const [count, setCount] = useState<number>(0);
-
   return (
     <Container component="main" maxWidth="lg" sx={{ mb: 8 }}>
       <Paper
@@ -51,7 +48,7 @@ export function UnixTimeForm(props: any) {
         sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
       >
         <Typography component="h2" variant="h5" align="center">
-          UnixTime相互変換 {count}
+          UnixTime相互変換
         </Typography>
         <Grid
           container
@@ -81,8 +78,8 @@ export function UnixTimeForm(props: any) {
               fullWidth
               variant="standard"
               value={timer.timestamp}
-              onChange={e => {
-                setTimerObject(prevState => {
+              onChange={(e) => {
+                setTimerObject((prevState) => {
                   return { ...prevState, timestamp: e.target.value };
                 });
               }}
@@ -105,7 +102,6 @@ export function UnixTimeForm(props: any) {
               variant="outlined"
               fullWidth
               onClick={() => {
-                setCount(count + 1);
                 setTimerObject(timer);
               }}
             >

@@ -10,6 +10,18 @@ export interface TimerObject {
   isValidTimeStamp: boolean;
 }
 
+export function newTimer(): TimerObject {
+  return {
+    hasMilliseconds: false,
+    timeStamp: "",
+    unixtime: 0,
+    locale: "ja-JP",
+    timeZone: "Asia/Tokyo",
+    isValidTimeStamp: true,
+    isValidUnixtime: true,
+  };
+}
+
 export function updateTimeStamp(timer: TimerObject): TimerObject {
   const ret = { ...timer };
   const date = new Date(ret.unixtime);

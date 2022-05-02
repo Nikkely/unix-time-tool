@@ -1,7 +1,7 @@
-import { TimerObject, newTimer, isValidTimer } from "../domain/timer";
+import { TimerObject, createTimer, isValidTimer } from "../domain/timer";
 
 test("test isValidTimer", () => {
-    const timer = newTimer()
+    const timer = createTimer()
     timer.timeStamp= "hogehogehoge"
     expect(isValidTimer(timer)).toBeFalsy()
 });

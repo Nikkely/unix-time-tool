@@ -8,7 +8,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import { TimerObject, updateTimeStamp, isValidTimer } from "../domain/timer";
+import { TimerObject, updateTimeStamp, createTimer } from "../domain/timer";
 
 export function UnixTimeForm(props: any) {
   const [date, setDate] = useState<Date | null>(new Date());
@@ -17,15 +17,7 @@ export function UnixTimeForm(props: any) {
   };
 
   // stateを作成
-  const [timer, setTimerObject] = useState<TimerObject>({
-    hasMilliseconds: false,
-    timeStamp: "",
-    unixtime: 0,
-    locale: "ja-JP",
-    timeZone: "Asia/Tokyo",
-    isValidTimeStamp: true,
-    isValidUnixtime: true,
-  });
+  const [timer, setTimerObject] = useState<TimerObject>(createTimer());
 
   return (
     <Container component="main" maxWidth="lg" sx={{ mb: 8 }}>

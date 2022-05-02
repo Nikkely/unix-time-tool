@@ -10,7 +10,7 @@ export interface TimerObject {
   isValidTimeStamp: boolean;
 }
 
-export function newTimer(): TimerObject {
+export function createTimer(): TimerObject {
   return {
     hasMilliseconds: false,
     timeStamp: "",

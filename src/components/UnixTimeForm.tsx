@@ -8,25 +8,9 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import { makeStyles } from "@material-ui/core/styles";
-
-interface TimerObject {
-  unixtime: number;
-  timestamp: string;
-  hasMilliseconds: boolean;
-  locale: string;
-  timeZone: string;
-}
-
-const updateTimeStamp = (timer: TimerObject) => {
-  const date = new Date(timer.unixtime);
-  timer.timestamp = date.toLocaleString(timer.locale, {
-    timeZone: timer.timeZone,
-  });
-};
+import { TimerObject, updateTimeStamp, isValidTimer } from "../domain/timer";
 
 export function UnixTimeForm(props: any) {
-  const classes = useStyles();
   const [date, setDate] = useState<Date | null>(new Date());
   const changeDateHandler = (newDate: Date | null): void => {
     setDate(newDate);
@@ -35,10 +19,12 @@ export function UnixTimeForm(props: any) {
   // stateを作成
   const [timer, setTimerObject] = useState<TimerObject>({
     hasMilliseconds: false,
-    timestamp: "",
+    timeStamp: "",
     unixtime: 0,
     locale: "ja-JP",
     timeZone: "Asia/Tokyo",
+    isValidTimeStamp: true,
+    isValidUnixtime: true,
   });
 
   return (
@@ -57,30 +43,37 @@ export function UnixTimeForm(props: any) {
           alignItems="center"
           spacing={2}
         >
-          <Grid item className={classes.grid} xs={4}>
+          <Grid item xs={4}>
             <TextField
               id="unixtime-form"
               label="UnixTime"
+              variant="standard"
+              margin="normal"
               fullWidth
+              error={!timer.isValidUnixtime}
               onChange={(e) => {
-                timer.unixtime = parseInt(e.target.value);
-                updateTimeStamp(timer);
+                const newTimer = updateTimeStamp({
+                  ...timer,
+                  unixtime: parseInt(e.target.value),
+                });
+
                 setTimerObject(() => {
-                  return { ...timer };
+                  return { ...newTimer };
                 });
               }}
             />
           </Grid>
-          <Grid item className={classes.grid} xs={4}>
+          <Grid item xs={4}>
             <TextField
               id="time-form"
               label="時刻"
               fullWidth
               variant="standard"
-              value={timer.timestamp}
+              error={!timer.isValidTimeStamp}
+              value={timer.timeStamp}
               onChange={(e) => {
                 setTimerObject((prevState) => {
-                  return { ...prevState, timestamp: e.target.value };
+                  return { ...prevState, timeStamp: e.target.value, isValidTimeStamp: true };
                 });
               }}
             />
@@ -97,18 +90,21 @@ export function UnixTimeForm(props: any) {
           alignItems="center"
           spacing={2}
         >
-          <Grid item className={classes.grid} xs={4}>
+          <Grid item xs={4}>
             <Button
               variant="outlined"
               fullWidth
               onClick={() => {
-                setTimerObject(timer);
+                const newTimer = updateTimeStamp(timer);
+                setTimerObject(() => {
+                  return { ...newTimer };
+                });
               }}
             >
               UnixTimeを変換
             </Button>
           </Grid>
-          <Grid item className={classes.grid} xs={4}>
+          <Grid item xs={4}>
             <Button variant="outlined" fullWidth>
               UnixTimeに変換
             </Button>
@@ -118,9 +114,3 @@ export function UnixTimeForm(props: any) {
     </Container>
   );
 }
-
-const useStyles = makeStyles((theme) => ({
-  grid: {
-    margin: "auto",
-  },
-}));

@@ -15,6 +15,7 @@ import {
   updateUnixtime,
 } from "../domain/timer";
 import { hasMilliSecnods } from "../domain/util";
+import { UnixTimeDetail } from "./UnixTimeDetail";
 
 export function UnixTimeForm(props: any) {
   const [date, setDate] = useState<Date | null>(new Date());
@@ -125,6 +126,25 @@ export function UnixTimeForm(props: any) {
           </Grid>
         </Grid>
       </Paper>
+
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+      >
+        <Grid item xs={4}>
+          <UnixTimeDetail {...{
+            timer: timer,
+            toggleMillSconds: () => {
+                setTimerObject(prevTimer => {
+                  return {...prevTimer, hasMilliseconds: !prevTimer.hasMilliseconds}
+                });
+              }
+          }} />
+        </Grid>
+      </Grid>
     </Container>
   );
 }

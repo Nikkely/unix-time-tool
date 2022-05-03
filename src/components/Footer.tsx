@@ -21,7 +21,7 @@ export function Footer() {
         align="center"
         sx={{ color: '#ffffff'}}
       >
-        Copyright &copy; <a href="https://github.com/Nikkely">Nikkely</a>
+        Copyright &copy; 2022 <a href="https://github.com/Nikkely">Nikkely</a>
       </Typography>
     </div>
   );

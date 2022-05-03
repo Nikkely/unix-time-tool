@@ -45,7 +45,7 @@ describe("test updateUnixtime", () => {
   it("with millseconds", () => {
     const timer = createTimer();
     timer.timeStamp = "2009-12-14T08:31:30.123+09:00"
-    timer.hasMilliseconds = true
+    timer.hasMilliseconds = hasMilliSecnods(timer.timeStamp)
 
     const newTimer = updateUnixtime(timer)
     expect(newTimer.isValidTimeStamp).toBeTruthy();

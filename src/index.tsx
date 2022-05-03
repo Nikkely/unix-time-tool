@@ -4,7 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { CssBaseline } from "@material-ui/core";
 
-import { UnixTimeForm } from "./components/UnixTimeForm";
+import { MainForm } from "./components/MainForm";
 import {Header} from "./components/Header"
 
 const root = ReactDOM.createRoot(
@@ -18,7 +18,7 @@ root.render(
     </header>
 
     <main>
-      <UnixTimeForm />
+      <MainForm />
     </main>
   </React.StrictMode>
 );

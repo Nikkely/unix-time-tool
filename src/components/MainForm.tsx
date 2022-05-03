@@ -17,7 +17,7 @@ import {
 import { hasMilliSecnods } from "../domain/util";
 import { UnixTimeDetail } from "./UnixTimeDetail";
 
-export function UnixTimeForm(props: any) {
+export function MainForm(props: any) {
   const [date, setDate] = useState<Date | null>(new Date());
   const changeDateHandler = (newDate: Date | null): void => {
     setDate(newDate);

@@ -2,10 +2,9 @@ import { isValidDate } from "./util";
 
 export interface TimerObject {
   unixtime: number;
-  timeStamp: string;
+  timeStamp: string; // ISO format
   hasMilliseconds: boolean;
-  locale: string;
-  timeZone: string;
+  timeZoneOffset: number; // minutes
   isValidUnixtime: boolean;
   isValidTimeStamp: boolean;
 }
@@ -15,8 +14,7 @@ export function createTimer(): TimerObject {
     hasMilliseconds: false,
     timeStamp: "",
     unixtime: 0,
-    locale: "ja-JP",
-    timeZone: "Asia/Tokyo",
+    timeZoneOffset: -540,
     isValidTimeStamp: true,
     isValidUnixtime: true,
   };
@@ -24,16 +22,28 @@ export function createTimer(): TimerObject {
 
 export function updateTimeStamp(timer: TimerObject): TimerObject {
   const ret = { ...timer };
-  const date = new Date(ret.unixtime);
+  const a = timer.hasMilliseconds ? 1 : 1000
+  const date = new Date(ret.unixtime * a - ret.timeZoneOffset * 60 * 1000);
   ret.isValidUnixtime = isValidDate(date);
   if (!ret.isValidUnixtime) return ret;
-  ret.timeStamp = date.toLocaleString(ret.locale, {
-    timeZone: ret.timeZone,
-  });
+
+  const ope = ret.timeZoneOffset <= 0 ? "+" : "-";
+  ret.timeStamp = date
+    .toISOString()
+    .replace(
+      "Z",
+      ope + String(Math.abs(ret.timeZoneOffset / 60)).padStart(2, "0") + ":00"
+    );
   return ret;
 }
 
 export function updateUnixtime(timer: TimerObject): TimerObject {
   const ret = { ...timer };
+  const date = new Date(timer.timeStamp);
+  ret.isValidTimeStamp = isValidDate(date);
+  if (!ret.isValidTimeStamp) return ret;
+
+  const a = ret.hasMilliseconds ? 1 : 1000
+  ret.unixtime = Math.floor(date.getTime() / a);
   return ret;
 }

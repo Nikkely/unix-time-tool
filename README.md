@@ -1,3 +1,3 @@
 # unix-time-tool
-unixtime変換
-react素振り用
+
+https://nikkely.github.io/unix-time-tool/index.html

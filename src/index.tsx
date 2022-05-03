@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { CssBaseline } from "@material-ui/core";
+import CssBaseline from "@mui/material/CssBaseline";
 
 import { MainForm } from "./components/MainForm";
 import { Header } from "./components/Header";

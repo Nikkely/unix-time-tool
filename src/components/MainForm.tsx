@@ -1,8 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
-import DateFnsUtils from "@date-io/date-fns";
-import { format, compareAsc } from "date-fns";
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -16,13 +13,9 @@ import {
 } from "../domain/timer";
 import { hasMilliSecnods } from "../domain/util";
 import { UnixTimeDetail } from "./UnixTimeDetail";
+import { TimeStampDetail } from "./TimeStampDetail";
 
 export function MainForm(props: any) {
-  const [date, setDate] = useState<Date | null>(new Date());
-  const changeDateHandler = (newDate: Date | null): void => {
-    setDate(newDate);
-  };
-
   // stateを作成
   const [timer, setTimerObject] = useState<TimerObject>(createTimer());
 
@@ -86,9 +79,6 @@ export function MainForm(props: any) {
               }}
             />
           </Grid>
-          {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <DatePicker value={date} onChange={changeDateHandler} />
-          </MuiPickersUtilsProvider> */}
         </Grid>
 
         <Grid
@@ -108,7 +98,7 @@ export function MainForm(props: any) {
                 });
               }}
             >
-              UnixTimeを変換
+              時刻に変換
             </Button>
           </Grid>
           <Grid item xs={4}>
@@ -131,18 +121,51 @@ export function MainForm(props: any) {
         container
         direction="row"
         justifyContent="center"
-        alignItems="center"
+        alignItems="baseline"
         spacing={2}
       >
         <Grid item xs={4}>
-          <UnixTimeDetail {...{
-            timer: timer,
-            toggleMillSconds: () => {
-                setTimerObject(prevTimer => {
-                  return {...prevTimer, hasMilliseconds: !prevTimer.hasMilliseconds}
+          <UnixTimeDetail
+            {...{
+              timer: timer,
+              toggleMillSconds: () => {
+                setTimerObject((prevTimer) => {
+                  return {
+                    ...prevTimer,
+                    hasMilliseconds: !prevTimer.hasMilliseconds,
+                  };
                 });
-              }
-          }} />
+              },
+            }}
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <TimeStampDetail
+            {...{
+              timer: timer,
+              updateOffset: (offset) => {
+                setTimerObject((prevTimer) => {
+                  return {
+                    ...updateTimeStamp({
+                      ...prevTimer,
+                      timeZoneOffset: offset,
+                    }),
+                  };
+                });
+              },
+              updateDate: (date) => {
+                setTimerObject((prevTimer) => {
+                  return {
+                    ...prevTimer,
+                    timeStamp: prevTimer.timeStamp.replace(
+                      /\d\d\d\d-\d\d-\d\d/,
+                      date
+                    ),
+                  };
+                });
+              },
+            }}
+          />
         </Grid>
       </Grid>
     </Container>

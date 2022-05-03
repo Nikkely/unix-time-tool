@@ -10,14 +10,14 @@ export interface TimerObject {
 }
 
 export function createTimer(): TimerObject {
-  return {
+  return updateTimeStamp({
     hasMilliseconds: false,
     timeStamp: "",
-    unixtime: 0,
+    unixtime: Math.floor(Date.now()/1000),
     timeZoneOffset: -540,
     isValidTimeStamp: true,
     isValidUnixtime: true,
-  };
+  });
 }
 
 export function updateTimeStamp(timer: TimerObject): TimerObject {
@@ -34,6 +34,7 @@ export function updateTimeStamp(timer: TimerObject): TimerObject {
       "Z",
       ope + String(Math.abs(ret.timeZoneOffset / 60)).padStart(2, "0") + ":00"
     );
+  ret.isValidTimeStamp = true
   return ret;
 }
 
@@ -45,5 +46,6 @@ export function updateUnixtime(timer: TimerObject): TimerObject {
 
   const a = ret.hasMilliseconds ? 1 : 1000
   ret.unixtime = Math.floor(date.getTime() / a);
+  ret.isValidUnixtime = true
   return ret;
 }

@@ -8,7 +8,8 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import { TimerObject, updateTimeStamp, createTimer } from "../domain/timer";
+import { TimerObject, updateTimeStamp, createTimer, updateUnixtime } from "../domain/timer";
+import { hasMilliSecnods } from "../domain/util";
 
 export function UnixTimeForm(props: any) {
   const [date, setDate] = useState<Date | null>(new Date());
@@ -42,15 +43,19 @@ export function UnixTimeForm(props: any) {
               variant="standard"
               margin="normal"
               fullWidth
+              type="number"
               error={!timer.isValidUnixtime}
+              value={timer.unixtime}
               onChange={(e) => {
+                const ut = parseInt(e.target.value);
                 const newTimer = updateTimeStamp({
                   ...timer,
-                  unixtime: parseInt(e.target.value),
+                  unixtime: ut,
+                  hasMilliseconds: hasMilliSecnods(ut),
                 });
 
                 setTimerObject(() => {
-                  return { ...newTimer };
+                  return newTimer;
                 });
               }}
             />
@@ -64,8 +69,13 @@ export function UnixTimeForm(props: any) {
               error={!timer.isValidTimeStamp}
               value={timer.timeStamp}
               onChange={(e) => {
-                setTimerObject((prevState) => {
-                  return { ...prevState, timeStamp: e.target.value, isValidTimeStamp: true };
+                const newTimer = updateUnixtime({
+                  ...timer,
+                  timeStamp: e.target.value,
+                  hasMilliseconds: hasMilliSecnods(e.target.value)
+                })
+                setTimerObject(() => {
+                  return newTimer;
                 });
               }}
             />

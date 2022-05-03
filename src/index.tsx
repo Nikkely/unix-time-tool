@@ -5,13 +5,13 @@ import reportWebVitals from "./reportWebVitals";
 import { CssBaseline } from "@material-ui/core";
 
 import { MainForm } from "./components/MainForm";
-import {Header} from "./components/Header"
+import { Header } from "./components/Header";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  <>
     <CssBaseline />
     <header>
       <Header></Header>
@@ -20,7 +20,7 @@ root.render(
     <main>
       <MainForm />
     </main>
-  </React.StrictMode>
+  </>
 );
 
 // https://bit.ly/CRA-vitals

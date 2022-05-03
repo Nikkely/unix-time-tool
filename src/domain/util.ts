@@ -12,12 +12,12 @@ export const hasMilliSecnods = (arg: number | string) => {
 
 // parse timeZoneOffset from ISO format timesptmp
 export const parseTimeZoneOffset = (timeStamp: string) => {
-    const tz = timeStamp.match(/[\+\-]\d\d:\d\d/)
+    const tz = timeStamp.match(/[+-]\d\d:\d\d/)
     if (tz == null) return 0
 
     const ope = tz[0][0]
     const hour = parseInt(tz[0][1]) * 10 + parseInt(tz[0][2])
-    if (hour === NaN) return 0
+    if (Number.isNaN(hour)) return 0
     if (ope === '+') {
         return -hour * 60
     } else if (ope === '-') {

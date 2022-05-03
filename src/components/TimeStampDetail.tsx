@@ -33,6 +33,9 @@ export function TimeStampDetail(props: TimeStampDetailProps) {
       <Typography component="h3" variant="h6" align="center">
         時刻詳細
       </Typography>
+      <Typography component="p" variant="body2" align="center">
+        入力補助
+      </Typography>
       <Container sx={{ mt: 2 }}>
         <Typography component="span">タイムゾーン 現在:{utc}</Typography>
         <ButtonGroup
@@ -58,7 +61,7 @@ export function TimeStampDetail(props: TimeStampDetailProps) {
         </ButtonGroup>
       </Container>
       <Container sx={{ mt: 3 }}>
-        <Typography component="span">日付入力補助</Typography>
+        <Typography component="span">日付</Typography>
         <div>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <DatePicker value={date} onChange={changeDateHandler} />

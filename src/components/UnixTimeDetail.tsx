@@ -14,7 +14,10 @@ export function UnixTimeDetail(props: UnixTimeDetailProps) {
   return (
     <Paper sx={{ my: { md: 2 }, p: { xs: 1 } }}>
       <Typography component="h3" variant="h6" align="center">
-        UnixTime詳細
+        UNIXtime詳細
+      </Typography>
+      <Typography component="p" variant="body2" align="center">
+        設定
       </Typography>
       <FormGroup sx={{ margin: 2 }}>
         <FormControlLabel
@@ -24,7 +27,7 @@ export function UnixTimeDetail(props: UnixTimeDetailProps) {
               onChange={props.toggleMillSconds}
             />
           }
-          label="ミリ秒を含む"
+          label="ミリ秒単位"
         />
       </FormGroup>
     </Paper>

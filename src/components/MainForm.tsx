@@ -22,11 +22,14 @@ export function MainForm(props: any) {
   return (
     <Container component="main" maxWidth="lg" sx={{ mb: 8 }}>
       <Paper
-        variant="outlined"
+        elevation={5}
         sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
       >
         <Typography component="h2" variant="h5" align="center">
-          UnixTime相互変換
+          UNIXtime相互変換
+        </Typography>
+        <Typography component="p" variant="body1" align="center">
+          ミリ秒単位の表記にも対応
         </Typography>
         <Grid
           container

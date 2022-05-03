@@ -8,7 +8,12 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import { TimerObject, updateTimeStamp, createTimer, updateUnixtime } from "../domain/timer";
+import {
+  TimerObject,
+  updateTimeStamp,
+  createTimer,
+  updateUnixtime,
+} from "../domain/timer";
 import { hasMilliSecnods } from "../domain/util";
 
 export function UnixTimeForm(props: any) {
@@ -72,8 +77,8 @@ export function UnixTimeForm(props: any) {
                 const newTimer = updateUnixtime({
                   ...timer,
                   timeStamp: e.target.value,
-                  hasMilliseconds: hasMilliSecnods(e.target.value)
-                })
+                  hasMilliseconds: hasMilliSecnods(e.target.value),
+                });
                 setTimerObject(() => {
                   return newTimer;
                 });
@@ -97,9 +102,8 @@ export function UnixTimeForm(props: any) {
               variant="outlined"
               fullWidth
               onClick={() => {
-                const newTimer = updateTimeStamp(timer);
                 setTimerObject(() => {
-                  return { ...newTimer };
+                  return updateTimeStamp(timer);
                 });
               }}
             >
@@ -107,7 +111,15 @@ export function UnixTimeForm(props: any) {
             </Button>
           </Grid>
           <Grid item xs={4}>
-            <Button variant="outlined" fullWidth>
+            <Button
+              variant="outlined"
+              fullWidth
+              onClick={() => {
+                setTimerObject(() => {
+                  return updateUnixtime(timer);
+                });
+              }}
+            >
               UnixTimeに変換
             </Button>
           </Grid>

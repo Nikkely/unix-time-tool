@@ -25,7 +25,7 @@ export function TimeStampDetail(props: TimeStampDetailProps) {
 
   const ope = props.timer.timeZoneOffset <= 0 ? "+" : "-";
   const utc =
-    props.timer.timeZoneOffset === 0
+    props.timer.timeZoneOffset === 0 
       ? "UTC"
       : `UTC${ope}${Math.abs(props.timer.timeZoneOffset / 60)}`;
   return (

@@ -11,7 +11,7 @@ import {
   createTimer,
   updateUnixtime,
 } from "../domain/timer";
-import { hasMilliSecnods } from "../domain/util";
+import { hasMilliSecnods, parseTimeZoneOffset } from "../domain/util";
 import { UnixTimeDetail } from "./UnixTimeDetail";
 import { TimeStampDetail } from "./TimeStampDetail";
 
@@ -68,10 +68,12 @@ export function MainForm(props: any) {
               error={!timer.isValidTimeStamp}
               value={timer.timeStamp}
               onChange={(e) => {
+                const timeStamp = e.target.value
                 const newTimer = updateUnixtime({
                   ...timer,
-                  timeStamp: e.target.value,
-                  hasMilliseconds: hasMilliSecnods(e.target.value),
+                  timeStamp,
+                  timeZoneOffset: parseTimeZoneOffset(timeStamp),
+                  hasMilliseconds: hasMilliSecnods(timeStamp),
                 });
                 setTimerObject(() => {
                   return newTimer;

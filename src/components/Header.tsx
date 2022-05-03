@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 
 export function Header() {
   return (
-    <AppBar position="static" variant="outlined">
+    <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="h1">UnixTime変換</Typography>
       </Toolbar>

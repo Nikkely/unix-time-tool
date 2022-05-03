@@ -24,7 +24,7 @@ export function UnixTimeDetail(props: UnixTimeDetailProps) {
               onChange={props.toggleMillSconds}
             />
           }
-          label="ミリ秒指定"
+          label="ミリ秒を含む"
         />
       </FormGroup>
     </Paper>

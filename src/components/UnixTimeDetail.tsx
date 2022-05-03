@@ -12,11 +12,11 @@ interface UnixTimeDetailProps {
 
 export function UnixTimeDetail(props: UnixTimeDetailProps) {
   return (
-    <Paper>
+    <Paper sx={{ my: { md: 2 }, p: { xs: 1 } }}>
       <Typography component="h3" variant="h6" align="center">
         UnixTime詳細
       </Typography>
-      <FormGroup>
+      <FormGroup sx={{ margin: 2 }}>
         <FormControlLabel
           control={
             <Checkbox
